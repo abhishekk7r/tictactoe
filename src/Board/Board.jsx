@@ -1,29 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sqaure from './Sqaure';
 
-//? we pass the board index in the value of the sqaure.
-
-const Board = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [isXNext, setIsXNext] = useState(false);
-
-  const handleSqaureClick = position => {
-    if (board[position]) {
-      return;
-    }
-
-    setBoard(prev => {
-      return prev.map((square, pos) => {
-        if (pos === position) {
-          return isXNext ? 'X' : '0';
-        }
-
-        return square;
-      });
-    });
-    setIsXNext(prev => !prev);
-  };
-
+const Board = ({ board, handleSqaureClick }) => {
   const renderSqaure = position => {
     return (
       <Sqaure
