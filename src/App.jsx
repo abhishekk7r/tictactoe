@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Board from './components/Board.jsx';
 import History from './components/History.jsx';
+import StatusMessage from './components/StatusMessage.jsx';
 import './styles/root.scss';
 import { calculateWinner } from './helpers.js';
 
@@ -14,10 +15,6 @@ const app = () => {
   const current = history[currentMove];
   const winner = calculateWinner(current.board);
   console.log(winner);
-
-  const message = winner
-    ? `Winner is ${winner}`
-    : `Next Player is ${current.isXNext ? 'X' : 'O'}`;
 
   const handleSqaureClick = position => {
     if (current.board[position] || winner) {
@@ -44,7 +41,7 @@ const app = () => {
   return (
     <div className="app">
       <h1>TIC TAC TOE !</h1>
-      <h2>{message}</h2>
+      <StatusMessage winner={winner} current={current}/>
       <Board board={current.board} handleSqaureClick={handleSqaureClick} />
       <History history={history} moveTo={moveTo} currentMove={currentMove} />
     </div>
